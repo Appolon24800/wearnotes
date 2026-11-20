@@ -114,6 +114,11 @@ jobs:
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
 
+      - name: Make GHCR package public
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PATCH /user/packages/container/wearnotes -f visibility=public
+
       - name: Publish GitHub release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
