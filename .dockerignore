@@ -1,0 +1,8 @@
+.git
+.gradle
+build
+app
+core
+docs
+assets
+*.md

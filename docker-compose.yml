@@ -1,0 +1,21 @@
+services:
+  wearnotes:
+    build:
+      context: ./server
+    container_name: wearnotes
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      WEARNOTES_ADDR: ":8080"
+      WEARNOTES_DATA: "/data"
+      WEARNOTES_PUBLIC_URL: "${WEARNOTES_PUBLIC_URL:-http://localhost:8080}"
+      WEARNOTES_OIDC_ISSUER: "${WEARNOTES_OIDC_ISSUER:-}"
+      WEARNOTES_OIDC_CLIENT_ID: "${WEARNOTES_OIDC_CLIENT_ID:-}"
+      WEARNOTES_OIDC_CLIENT_SECRET: "${WEARNOTES_OIDC_CLIENT_SECRET:-}"
+      WEARNOTES_OIDC_REDIRECT_URL: "${WEARNOTES_OIDC_REDIRECT_URL:-}"
+    volumes:
+      - wearnotes-data:/data
+
+volumes:
+  wearnotes-data:
